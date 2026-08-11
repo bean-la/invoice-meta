@@ -4,3 +4,9 @@
 [submodule "wrklogr"]
 	path = wrklogr
 	url = https://github.com/bean-la/wrklogr.git
+[submodule "_src/brodie"]
+	path = _src/brodie
+	url = https://github.com/bean-la/brodie.git
+[submodule "_src/shopbrodie-shopify"]
+	path = _src/shopbrodie-shopify
+	url = https://github.com/bean-la/shopbrodie-shopify.git
