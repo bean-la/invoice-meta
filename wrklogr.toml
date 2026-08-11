@@ -1,27 +1,49 @@
-# wrklogr config for invoice-meta (G012 Slice B — brodie July invoice POC).
-# Noko project mapping aligns with the Notion Clients DB "Noko Project ID"
-# (719747 = Brodie Shell) so FindClientByNokoProjectID resolves H-N-M.
-# NOTE: brodie-meta/wrklogr.toml maps to 716642 (Brodie Pet) — MISMATCH
-# flagged; this file is the invoice-side canonical mapping.
+# wrklogr config for invoice-meta (G012 — cross-project monthly invoicing).
+#
+# Per-project Noko mappings: the notion-invoice flow attributes git sessions
+# to a client via [noko.projects] → Notion Clients DB "Noko Project ID".
+# Local-path mode labels commits with filepath.Base(path) — bare repo name
+# keys (NOT org/repo prefixes; that's API mode only).
+#
+# Noko ids sourced from: project-meta wrklogr.toml files + Notion Clients DB
+# (Noko Project ID property). invoice-meta is the invoice-side canonical map.
 
-repos = ["bean-la/brodie-meta", "bean-la/shopbrodie-shopify"]
+repos = ["bean-la/brodie-meta", "bean-la/jono-meta", "bean-la/salon94-meta"]
 session_gap = "4h"
 min_session_hours = 3
 timezone = "America/New_York"
 
 [gcal]
 calendar = "seb@bean.la"
-keywords = ["brodie"]
 
 [notion]
 # Runbook DB ids — Invoice Status + Clients (live, verified via Notion API)
 invoice_db_id = "3176fa6290f3434b85f0738972c0ae75"
 clients_db_id = "6859c5c9453d4675a99ea2e12b9c4025"
-role = "backend" # H-N-M Backend Dev Rate = 1100
+role = "backend"
 
 [noko]
 [noko.projects]
-# Local-path mode labels commits with filepath.Base(path) — bare repo name,
-# NOT the github org/repo prefix (that's API mode only). Keys must match.
+# brodie — Clients DB H-N-M (Brodie Pet) → 719747 (Brodie Shell). Matches
+# brodie-meta/wrklogr.toml (fixed 2026-08-11 from 716642).
 "brodie-meta" = { project_id = 719747 }
 "shopbrodie-shopify" = { project_id = 719747 }
+
+# jono — jono-meta/wrklogr.toml maps to 560046 (JPD / Pando platform).
+"jono-meta" = { project_id = 560046 }
+"pando-platform" = { project_id = 560046 }
+"pando-db" = { project_id = 560046 }
+
+# salon94 — salon94-meta/wrklogr.toml maps to 611157.
+"salon94-meta" = { project_id = 611157 }
+"art-gallery-template" = { project_id = 611157 }
+"salon94-pdf-ios" = { project_id = 611157 }
+
+# ── PENDING: slyce / dublab / farmppl ──────────────────────────────────
+# No Noko project id registered yet (no wrklogr.toml in those project-metas,
+# no Clients DB row with a Noko id). These projects cannot be invoiced until
+# the client is registered + a Noko project exists. G012 guard: don't bill
+# projects without a registered mapping.
+#   slyce-meta:    (none)
+#   dublab-meta:   (none)
+#   farmppl-meta:  (none)
