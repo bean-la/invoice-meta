@@ -17,7 +17,7 @@ lanes:
     mailbox: open
     work: >-
       Poll ALL project goal boards (goals/ in each project-meta repo via
-      brane MCP) and assemble monthly invoice data. Plan, decompose, and
+      brane MCP) AND brane/_inbox/ flags routed to me + handoffs. Assemble monthly invoice data. Plan, decompose, and
       track invoice work; side-channel with project agents for
       billing-relevant activity. Track status/priority/next-action.
       Close the loop when an invoice ships or parks. Idle when nothing
@@ -30,6 +30,6 @@ lanes:
     thinking: low
     mailbox: open
     work: >-
-      Poll handoffs routed to hackdaddy. Read the handoff, execute the
+      Poll handoffs + brane/_inbox/ flags routed to hackdaddy. Read the handoff/flag, execute the
       work (invoice data assembly, wrklogr reports, exports), verify with
       evidence, report back. Idle when nothing routed.
