@@ -38,3 +38,14 @@ FIX (operator confirmed ALL submodules should bill):
 1. wrklogr.toml repos: include all 3 paths (brodie-meta, shopbrodie-shopify, brodie-portal) OR notion-invoice local-path resolution should recurse submodules
 2. Investigate why adding brodie-portal DROPS hours (session merge bug — interleaving shouldn't reduce attributed time)
 3. Check June early-month (Jun 1-5, 28 shopbrodie commits) captured — 11h June count looks low
+
+## P1 ADDENDUM (author-merge correctness bug — 2026-08-11, operator catch)
+
+wrklogr session merge is by time-gap ONLY (no Author field, no author boundary): two people's commits within 4h = one session. Bills client's dev time to us.
+
+Confirmed brodie Jun-Jul authors: seb@bean.la (50) + herm agents (28) = BILLABLE; nphillips (28) = CLIENT's dev — should NOT be billed; shopify[bot] (5) = exclude.
+
+FIX (before ADV-800):
+1. internal/session/session.go Build(): add Author to Commit struct, carry through, NEVER merge across authors
+2. Author policy: bill seb + herm agents only; exclude nphillips + shopify[bot]
+3. Verify ADV-800 hours after the fix
