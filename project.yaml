@@ -12,8 +12,8 @@ lanes:
     order: 0
     role: planner
     description: Cross-project invoice assembly — plan, decompose, track, close
-    model: deepseek-v4-pro
-    thinking: high
+    model: deepseek-v4-flash
+    thinking: low
     mailbox: open
     work: >-
       Poll ALL project goal boards (goals/ in each project-meta repo via
