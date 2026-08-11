@@ -22,19 +22,8 @@ lanes:
       billing-relevant activity. Track status/priority/next-action.
       Close the loop when an invoice ships or parks. Idle when nothing
       actionable.
-  taskdaddy:
-    order: 1
-    role: orchestrator
-    description: Intake, triage, route, track, close
-    model: deepseek-v4-flash
-    thinking: low
-    mailbox: manual
-    work: >-
-      Poll intake (mailbox, handoffs, flags routed to me). Triage each ->
-      route to the right lane. Track ledger. Close loops. Idle when
-      nothing actionable.
   hackdaddy:
-    order: 2
+    order: 1
     role: builder
     description: Executes invoice work — data assembly, reports, exports
     model: deepseek-v4-flash
