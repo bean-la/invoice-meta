@@ -3,7 +3,7 @@ handoff_id: 20260811T1547Z-adv800-june-july-fixes
 project: invoice
 repo: bean-la/invoice-meta
 worktree: /home/herm/repos/github.com/bean-la/invoice-meta
-status: proposed
+status: working
 owner_agent: herm-b-invoice-hackdaddy
 owner_host: herm-b
 supersedes: []
@@ -11,7 +11,7 @@ task_id:
 lease_id:
 routed_via: invoicedaddy
 created_at: 2026-08-11T15:47:00Z
-updated_at: 2026-08-11T15:47:00Z
+updated_at: 2026-08-11T16:35:00Z
 closed_at:
 ---
 
@@ -55,6 +55,22 @@ ADV-800 needs to be updated to June+July range. The wrklogr tool has 4 bugs that
 2. Dry-run: `wrklogr notion-invoice --update --invoice-number ADV-800 --since 2026-06-01 --until 2026-07-31 --local-path /home/herm/repos/github.com/bean-la/brodie-meta --dry-run`
 3. Verify hours + amounts correct, then write mode
 4. Report to invoicedaddy
+
+## Progress (2026-08-11, invoice-hackdaddy)
+ALL 4 FIXES DONE + verified (build + tests pass, dry-run runs). Commit-based
+ADV-800 dry-run = **\$11,137.50 (10.1 days × \$1100/day)** across
+brodie-meta/brodie-portal/shopbrodie-shopify (author-filtered, all submodules,
+correct rate label).
+
+**BLOCKER (do not write yet):** `--gcal` raw dump over-counts badly — 127 events
+from the shared seb@bean.la calendar attributed to brodie = **\$64,487.50
+(58.6 days)**, clearly over-billed (calendar is shared across all clients,
+includes non-billable/recurring events).
+
+**Recommendation:** ship the commit-based draft (\$11,137.50, no gcal) as the
+corrected ADV-800, OR operator curates which specific meetings to include
+(builder prep, 6/23 client session, Aug 11 call) before writing. Awaiting
+operator/invoicedaddy decision.
 
 ## Do not
 - Touch jono/salon94 invoices

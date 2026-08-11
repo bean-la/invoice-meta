@@ -8,7 +8,7 @@
 # Noko ids sourced from: project-meta wrklogr.toml files + Notion Clients DB
 # (Noko Project ID property). invoice-meta is the invoice-side canonical map.
 
-repos = ["bean-la/brodie-meta", "bean-la/jono-meta", "bean-la/salon94-meta"]
+repos = ["bean-la/brodie-meta", "bean-la/jono-meta", "bean-la/salon94-meta", "bean-la/brodie"]
 session_gap = "4h"
 min_session_hours = 3
 timezone = "America/New_York"
@@ -28,6 +28,7 @@ role = "backend"
 # brodie-meta/wrklogr.toml (fixed 2026-08-11 from 716642).
 "brodie-meta" = { project_id = 719747 }
 "shopbrodie-shopify" = { project_id = 719747 }
+"brodie-portal" = { project_id = 719747 }
 
 # jono — jono-meta/wrklogr.toml maps to 560046 (JPD / Pando platform).
 "jono-meta" = { project_id = 560046 }
