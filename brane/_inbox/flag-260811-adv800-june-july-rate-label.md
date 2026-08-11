@@ -49,3 +49,14 @@ FIX (before ADV-800):
 1. internal/session/session.go Build(): add Author to Commit struct, carry through, NEVER merge across authors
 2. Author policy: bill seb + herm agents only; exclude nphillips + shopify[bot]
 3. Verify ADV-800 hours after the fix
+
+## P1 ADDENDUM (gcal meetings missing — 2026-08-11)
+
+notion-invoice has NO gcal flag (verified flags: author/repo/token/update/since/until/invoice-number/local-path/dry-run/notion-token/attach-pdf/description-only). gcal merge only in report_core.go (report path). So ADV-800 + all prior invoices = ZERO meeting time.
+
+Brodie Jun-Jul billable calls missing: builder prep (Nick/Ryan), 6/23 client session, Aug 11 call.
+
+FIX (before ADV-800):
+1. Add gcal to notion-invoice — pull [gcal] calendar = seb@bean.la events in billing range
+2. Merge as billable sessions (report_core.go pattern: event → session, fuzzy hours)
+3. Verify brodie meetings appear in ADV-800
