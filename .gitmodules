@@ -1,3 +1,6 @@
 [submodule "tools/wrklogr"]
 	path = tools/wrklogr
 	url = git@github.com:bean-la/wrklogr.git
+[submodule "wrklogr"]
+	path = wrklogr
+	url = https://github.com/bean-la/wrklogr.git
