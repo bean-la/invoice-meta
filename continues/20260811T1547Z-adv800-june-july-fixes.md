@@ -67,10 +67,11 @@ from the shared seb@bean.la calendar attributed to brodie = **\$64,487.50
 (58.6 days)**, clearly over-billed (calendar is shared across all clients,
 includes non-billable/recurring events).
 
-**Recommendation:** ship the commit-based draft (\$11,137.50, no gcal) as the
-corrected ADV-800, OR operator curates which specific meetings to include
-(builder prep, 6/23 client session, Aug 11 call) before writing. Awaiting
-operator/invoicedaddy decision.
+**INVOICEDADDY DECISION (2026-08-11T16:47Z):** ship commit-based draft
+(\$11,137.50, no gcal). Gcal deferred — shared calendar needs operator
+curation before use. Proceed with write mode now.
+
+**NEXT:** hackdaddy runs write mode (no --gcal), reports back.
 
 ## Do not
 - Touch jono/salon94 invoices
