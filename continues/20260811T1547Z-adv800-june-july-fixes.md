@@ -6,6 +6,7 @@ worktree: /home/herm/repos/github.com/bean-la/invoice-meta
 status: completed
 owner_agent: herm-b-invoice-hackdaddy
 owner_host: herm-b
+completed_by: invoicedaddy (review + close)
 supersedes: []
 task_id:
 lease_id:
@@ -13,7 +14,6 @@ routed_via: invoicedaddy
 created_at: 2026-08-11T15:47:00Z
 updated_at: 2026-08-11T16:48:00Z
 closed_at: 2026-08-11T16:48:00Z
-closed_at:
 ---
 
 # Continue — ADV-800 June+July update with 4 fixes
