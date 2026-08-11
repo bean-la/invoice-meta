@@ -1,0 +1,27 @@
+# wrklogr config for invoice-meta (G012 Slice B — brodie July invoice POC).
+# Noko project mapping aligns with the Notion Clients DB "Noko Project ID"
+# (719747 = Brodie Shell) so FindClientByNokoProjectID resolves H-N-M.
+# NOTE: brodie-meta/wrklogr.toml maps to 716642 (Brodie Pet) — MISMATCH
+# flagged; this file is the invoice-side canonical mapping.
+
+repos = ["bean-la/brodie-meta", "bean-la/shopbrodie-shopify"]
+session_gap = "4h"
+min_session_hours = 3
+timezone = "America/New_York"
+
+[gcal]
+calendar = "seb@bean.la"
+keywords = ["brodie"]
+
+[notion]
+# Runbook DB ids — Invoice Status + Clients (live, verified via Notion API)
+invoice_db_id = "3176fa6290f3434b85f0738972c0ae75"
+clients_db_id = "6859c5c9453d4675a99ea2e12b9c4025"
+role = "backend" # H-N-M Backend Dev Rate = 1100
+
+[noko]
+[noko.projects]
+# Local-path mode labels commits with filepath.Base(path) — bare repo name,
+# NOT the github org/repo prefix (that's API mode only). Keys must match.
+"brodie-meta" = { project_id = 719747 }
+"shopbrodie-shopify" = { project_id = 719747 }
