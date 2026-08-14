@@ -2,6 +2,7 @@
 flag_id: flag-260814-work-summary-status-grep-fix
 project: invoice
 status: open
+to_lane: herm/hackdaddy
 owner_lane: hackdaddy
 created_at: 2026-08-14T14:05:00Z
 created_by: herm-b-herm-goaldaddy
