@@ -3,8 +3,8 @@
 # work-summary — per-project monthly work summary (G012 Slice C, build half)
 #
 # Given a project-meta repo + month, extract the landed work:
-#   - closed goals (status: done in goals/*.md, or goaldaddy close-out
-#     commits touching goals/ in the month)
+#   - closed goals (status done/complete/completed/closed in goals/*.md, or
+#     goaldaddy close-out commits touching goals/ in the month)
 #   - committed handoffs (continues/*.md committed in the month)
 #   - session artifacts (brn call artifacts.query, tenant-scoped)
 #
@@ -83,14 +83,14 @@ MONTH_END=$(date -u -d "$MONTH_START +1 month" +%Y-%m-%d 2>/dev/null || date -u 
 # ── 1. closed goals ────────────────────────────────────────────────────
 echo "# ${PROJECT} — work summary for ${MONTH}"
 echo ""
-echo "## Closed goals (status: done)"
-CLOSED_GOALS=$(grep -l "^status: done" "$REPO_PATH/goals/"*.md 2>/dev/null || true)
+echo "## Closed goals"
+CLOSED_GOALS=$(grep -lE "^status:[[:space:]]*(done|complete|completed|closed)" "$REPO_PATH/goals/"*.md 2>/dev/null || true)
 if [[ -n "$CLOSED_GOALS" ]]; then
   for g in $CLOSED_GOALS; do
     title=$(grep "^title:" "$g" | head -1 | sed 's/^title:[[:space:]]*//')
     gid=$(grep "^goal_id:" "$g" | head -1 | sed 's/^goal_id:[[:space:]]*//')
     # Check if the close-out commit landed in the month
-    closed_in_month=$(git -C "$REPO_PATH" log --since="${MONTH_START}T00:00:00" --until="${MONTH_END}T00:00:00" --oneline -- "$g" 2>/dev/null | head -1)
+    closed_in_month=$(git -C "$REPO_PATH" log --since="${MONTH_START}T00:00:00" --until="${MONTH_END}T00:00:00" --oneline -n 1 -- "$g" 2>/dev/null || true)
     if [[ -n "$closed_in_month" ]]; then
       echo "- **${gid}** ${title} — closed (commit ${closed_in_month%% *})"
     else
@@ -104,7 +104,7 @@ fi
 # ── 2. committed handoffs ──────────────────────────────────────────────
 echo ""
 echo "## Handoffs committed in ${MONTH}"
-HANDOFFS=$(git -C "$REPO_PATH" log --since="${MONTH_START}T00:00:00" --until="${MONTH_END}T00:00:00" --name-only --format="COMMIT %h %s" -- "continues/*.md" 2>/dev/null | grep -E "^continues/|^COMMIT" | head -60)
+HANDOFFS=$(git -C "$REPO_PATH" log --since="${MONTH_START}T00:00:00" --until="${MONTH_END}T00:00:00" --name-only --format="COMMIT %h %s" -- "continues/*.md" 2>/dev/null | grep -E "^continues/|^COMMIT" | head -60 || true)
 if [[ -n "$HANDOFFS" ]]; then
   echo "$HANDOFFS" | while IFS= read -r line; do
     if [[ "$line" =~ ^COMMIT ]]; then
