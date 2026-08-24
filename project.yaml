@@ -12,7 +12,7 @@ lanes:
     order: 0
     role: planner
     description: Cross-project invoice assembly — plan, decompose, track, close
-    model: deepseek-v4-flash
+    model: openai-codex/gpt-5.6-luna
     thinking: low
     mailbox: open
     work: >-
@@ -26,7 +26,7 @@ lanes:
     order: 1
     role: builder
     description: Executes invoice work — data assembly, reports, exports
-    model: deepseek-v4-flash
+    model: openai-codex/gpt-5.6-luna
     thinking: low
     mailbox: open
     work: >-
