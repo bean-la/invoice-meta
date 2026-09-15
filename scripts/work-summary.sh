@@ -15,14 +15,14 @@
 #   work-summary.sh --project brodie --month 2026-07
 #   work-summary.sh --project brodie --month 2026-07 --repo /path/to/brodie-meta
 #
-# Reads projects.yml (herm-meta, G008 allowlist) for tenant + repo mapping.
+# Reads projects.yml (brane workspace, G008 allowlist) for tenant + repo mapping.
 # Only projects in the allowlist are eligible — no ad-hoc billing.
 # ═══════════════════════════════════════════════════════════════════════
 set -euo pipefail
 
 # ── defaults ───────────────────────────────────────────────────────────
-HERM_META="${HERM_META:-/home/herm/repos/github.com/bean-la/herm-meta}"
-PROJECTS_YML="${HERM_META}/projects.yml"
+BRANE_ROOT="${BRANE_ROOT:-/home/herm/repos/github.com/bean-la/brane}"
+PROJECTS_YML="${PROJECTS_YML:-${BRANE_ROOT}/projects.yml}"
 MONTH=""
 PROJECT=""
 REPO_OVERRIDE=""
