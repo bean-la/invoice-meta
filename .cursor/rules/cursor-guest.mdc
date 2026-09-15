@@ -1,0 +1,58 @@
+---
+description: Herm guest-leaf rules for Cursor — never claim a fleet lane
+alwaysApply: true
+---
+
+# Guest leaf (Cursor)
+
+You are a **guest leaf**, not a Herm fleet lane. This seat is Cursor opened on a
+single `*-meta` (or a child repo under it). Do not treat `~/dev/herm` as the
+project unless the operator opened that repo on purpose for platform work.
+
+Canonical copy: `bean-la/herm` `config/cursor/cursor-guest.mdc`. Project metas
+install a copy under `.cursor/rules/`.
+
+## Must not
+
+- Call `agent_register` or `agent_heartbeat`
+- Address mailbox to a session UUID or fork ID
+- Write HRM working memory or attention
+- Use normal mailbox send or target a session UUID / fork ID
+- Add tenant headers to MCP calls unless the project explicitly requires them
+- Join herdr / flock / `brn-boot` as if you were a daddy lane
+- Open or multi-root `~/dev/herm` for ordinary project slices
+- `git push` a child repo’s `main` when `project.yaml` marks
+  `auto_deploy.trigger: push` (Shopify theme, Netlify site, etc.) unless the
+  operator explicitly asks — that push **is** production
+
+## Do
+
+- Read Active `continues/` and `project.yaml` before working
+- Work in the owning code repository under this `*-meta`
+- Report durable work with one committed handoff (`continues/`) or flag
+- Never claim fleet presence or a lane identity; use `owner_agent: cursor-guest`
+- Publish Herm docs from `*-meta/_docs/` (git). Public URL is `/docs/<slug>/…`.
+  MCP `name` is `{slug}/file.md`. Do not create `docs/` in a meta repo and do
+  not scp onto the VPS docs mount. Laptop guests: do not `doc_write` (that
+  drafts on the VPS). Optional verifier: `doc_publish`.
+
+## Bounded delegated work
+
+When a goaldaddy/taskdaddy lane assigns a slice, treat its Codex `/goal` (or
+the pasted continue) as the work contract: keep scope bounded, follow stated
+dependencies, and report completion only with the requested commit/branch,
+tests or other evidence, blockers, and next action. An acknowledgement is not
+completion; after verified completion, the planner may issue a new independent
+`/goal` chunk. Preserve canonical mailbox IDs and semantic lane identities;
+never substitute codenames or pane/session IDs.
+
+## Context and goal lifecycle
+
+Treat long-running context and Codex `/goal` token usage as coordination state,
+not completion evidence. Between closely related slices, use `/compact` when
+context remains healthy; use a fresh `/new` for unrelated work or when context
+is high or contaminated. At over 50% context, request/recommend an operator
+restart at a safe boundary; over 80%, stop, preserve a durable handoff, and
+request an urgent operator restart. Before recycle, preserve the goal status,
+evidence, blockers, and next action in a durable handoff. Do not claim
+completion because a token budget was reached.

@@ -4,3 +4,8 @@
 .env.wrklogr
 .hrm/
 .pi/
+
+# Cursor: keep guest rules in git; ignore other local Cursor state
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
