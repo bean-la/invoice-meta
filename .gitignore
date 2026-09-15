@@ -5,6 +5,9 @@
 .hrm/
 .pi/
 
+# Generated MCP config (local / hrm upgrade); never commit
+.mcp.json
+
 # Cursor: keep guest rules in git; ignore other local Cursor state
 .cursor/*
 !.cursor/rules/
