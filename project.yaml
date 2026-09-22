@@ -5,6 +5,10 @@
 name: Invoice
 slug: invoice
 group: internal
+
+linear:
+  team_id: 2e73be7a-e279-40fb-8372-b1b1587b56d1
+  project_id: c5af7939-3c25-4134-9ef5-3ac1a262d3bf
 slack_channel: "#ai-psychosis"
 
 lanes:
