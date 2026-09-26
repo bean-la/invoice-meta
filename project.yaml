@@ -16,7 +16,6 @@ lanes:
     order: 0
     role: planner
     description: Cross-project invoice assembly — plan, decompose, track, close
-    model: openai-codex/gpt-6-luna
     mailbox: open
     work: >-
       Poll ALL project goal boards (goals/ in each project-meta repo via
@@ -29,7 +28,6 @@ lanes:
     order: 1
     role: builder
     description: Executes invoice work — data assembly, reports, exports
-    model: openai-codex/gpt-6-luna
     mailbox: open
     work: >-
       Poll handoffs + brane/_inbox/ flags routed to hackdaddy. Read the handoff/flag, execute the
