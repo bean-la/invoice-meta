@@ -25,9 +25,31 @@
 | Jono-meta | Coordination/configuration | Inbox routing, Linear project mapping, configuration and Pando pin | Not exposed |
 | Salon94-meta | Coordination/configuration | Inbox routing, Linear project mapping, shared config changes | Not exposed |
 
-## GCal review status
+## Client-call and email session rule
 
-wrklogr reported **48 calendar events**; its GCal-inclusive combined report totaled **189h**. It surfaced apparently relevant candidates (e.g. “Brodie / Bean — Tues Standup”, “Brodie / Bean — Bi-weekly Review”, “Wally x Bean”) and personal/unrelated-looking entries, plus an apparent 24-hour event. The report output does not expose event attendee lists or start/end details, so calendar time is **not counted as valid project time** here. Validate event identity, attendees, actual duration, and project attribution before including any calendar session. The raw wrklogr GCal-linked session output is included below for review; it is not a complete event dump of all 48 events.
+For this review, include client calls found in GCal and email messages authored by Nick or Seb that are client work. Apply a **30-minute (0.5h) minimum per qualifying session**; use actual event duration when longer. For email, treat a qualifying authored client message as a session subject to the same floor (avoid counting duplicate copies/replies in one thread twice). This floor is a review convention, not proof that the full minimum was spent.
+
+### GCal client-call candidates found with attendee search
+
+| Date (2026) | Project | Event | Scheduled duration | Invited attendees shown | Minimum-adjusted candidate |
+|---|---|---|---:|---|---:|
+| Sep 1 | Brodie | Brodie / Bean — Tues Standup | 30m | Ryan (H-N-M), Nick, Seb | 0.5h |
+| Sep 8 | Brodie | Brodie / Bean — Tues Standup | 30m | Ryan (H-N-M), Nick, Seb | 0.5h |
+| Sep 11 | Brodie | Brodie / Bean — Bi-weekly Review | 1h | Ryan (H-N-M), Nick, Seb | 1h |
+| Sep 16 | Brodie | Brodie / Bean — Tues Standup | 30m | Ryan (H-N-M), Nick, Seb | 0.5h |
+| Sep 22 | Brodie | Brodie / Bean — Tues Standup | 30m | Ryan (H-N-M), Nick, Seb | 0.5h |
+| Sep 25 | Brodie | Brodie / Bean — Bi-weekly Review | 1h | Ryan (H-N-M), Nick, Seb | 1h |
+| Sep 29 | Brodie | Brodie / Bean — Tues Standup | 30m | Ryan (H-N-M), Nick, Seb | 0.5h |
+| Sep 3 | Salon94 | Salon94 x Bean | 1h | Andrew and Athena (Salon94), Seb | 1h |
+| **Total candidate call time** | | **8 scheduled events** | **5.5h** | | **5.5h** |
+
+Calendar attendee lists show invitations, not verified attendance. The Brodie calls list both Nick and Seb; avoid counting a single project meeting twice in the project invoice total. Per-person allocation requires confirming who attended and whether both are to record individual person-hours. The Salon94 event lists Seb but not Nick. No matching Jono/Pando client-call event was found in the calendar search performed.
+
+### Gmail status
+
+Gmail searches returned no ingested messages for September. Live Gmail search is unavailable for the invoice tenant because it has no active shared relationship/email whitelist (403). Therefore **no email sessions are included yet**; search for client-directed messages authored by Nick/Seb once authorized access is available, then apply the 0.5h/session floor and deduplicate within threads.
+
+wrklogr separately reported **48 calendar events** and a GCal-inclusive combined estimate of **189h** (+83h vs the 106h commit-only estimate). That broad report includes non-client/personal-looking events and an apparent 24-hour event; do not use 189h as billable. The raw wrklogr GCal-linked output follows as a discovery aid, not validated client-call time or a complete raw event dump.
 
 ## Review checklist
 
