@@ -8,7 +8,19 @@
 # Noko ids sourced from: project-meta wrklogr.toml files + Notion Clients DB
 # (Noko Project ID property). invoice-meta is the invoice-side canonical map.
 
-repos = ["bean-la/brodie-meta", "bean-la/jono-meta", "bean-la/salon94-meta", "bean-la/brodie"]
+repos = [
+  # Brodie
+  "bean-la/brodie-meta", "bean-la/brodie", "bean-la/shopbrodie-shopify",
+  # Jono / Pando
+  "bean-la/jono-meta", "bean-la/pando-platform", "bean-la/pando-db",
+  "bean-la/pando-db-api", "bean-la/pando-db-web", "bean-la/jono-pandolfi-shopify",
+  "bean-la/jono-invoice", "bean-la/jono-dash", "bean-la/jono-docs-sop",
+  "bean-la/jono-restaurants", "bean-la/jpd-projects-portal", "bean-la/jono-ai",
+  # Salon94
+  "bean-la/salon94-meta", "bean-la/art-gallery-template", "bean-la/salon94-pdf-ios",
+  # Maxlevai / The Ranch
+  "bean-la/maxlevai-meta", "bean-la/theranch", "bean-la/maxlevai",
+]
 session_gap = "4h"
 min_session_hours = 3
 timezone = "America/New_York"
@@ -48,3 +60,4 @@ role = "backend"
 #   slyce-meta:    (none)
 #   dublab-meta:   (none)
 #   farmppl-meta:  (none)
+#   maxlevai-meta: (none; repo/project exists, but Noko mapping is not registered)
