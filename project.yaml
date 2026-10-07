@@ -5,6 +5,9 @@
 name: Invoice
 slug: invoice
 group: internal
+email_whitelist:
+  - nick@bean.la
+  - seb@bean.la
 
 linear:
   team_id: 2e73be7a-e279-40fb-8372-b1b1587b56d1
