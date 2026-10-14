@@ -37,3 +37,13 @@ ADV-786 line for $4,250.00 plus these three daily-cents lines, for a draft
 subtotal of $4,834.37. It is still a draft, has no hosted payment URL, and was
 not changed during this audit. A legacy-compatible combined total would be
 $4,888.00, so this draft is not yet the cutover proof.
+
+A separate live review draft, `A5C63363-0058`, was then created without
+finalization or sending. Its read-back total is exactly $4,888.00:
+
+- ADV-786 historical work: $4,250.00
+- Current Noko work: $637.50 (0.75 day at $850/day)
+- Legacy whole-dollar adjustment: $0.50
+
+It is marked `review_only` / `do_not_send` in metadata and has no hosted
+payment URL. Drafts `0056` and `0057` were not modified.

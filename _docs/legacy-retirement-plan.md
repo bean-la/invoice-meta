@@ -20,11 +20,11 @@ preferred.
 
 ## Verification gates
 
-- [ ] Compare one historical Notion/PDF invoice against a Stripe draft using
-  `legacy-quarter-day` and record the result. The read-only historical audit
-  matches ADV-786 exactly, but live draft `A5C63363-0057` currently uses
-  daily-cents for current work ($584.37) instead of the legacy-compatible
-  $638.00. No live draft was changed during this audit.
+- [x] Compare one historical Notion/PDF invoice against a Stripe draft using
+  `legacy-quarter-day` and record the result. Review draft `A5C63363-0058`
+  reads back at exactly $4,888.00: $4,250.00 for ADV-786, $637.50 for the
+  current 0.75 day, and a $0.50 renderer adjustment. It remains unfinalized
+  and unsent.
 - [x] Verify the Max current-hours calculation against the legacy Bean API:
   5.5 hours at $850/day → 0.75 day → $637.50, with the renderer-compatible
   $0.50 adjustment producing a $638.00 customer total.
@@ -108,8 +108,10 @@ with `--create`.
 
 The live Stripe account readback confirms draft `A5C63363-0057` is still in
 `draft` status with amount due `$4,834.37`, made up of the `$4,250.00` ADV-786
-line and `$584.37` in daily-cents current work. It has no hosted URL or paid
-timestamp. The separate `$5,150.00` draft `A5C63363-0056` remains untouched.
+line and `$584.37` in daily-cents current work. Review draft `A5C63363-0058`
+is also `draft`, with amount due `$4,888.00` and the expected legacy-compatible
+line breakdown. Neither has a hosted URL or paid timestamp. The separate
+`$5,150.00` draft `A5C63363-0056` remains untouched.
 
 A broader five-invoice sample (ADV-815, ADV-816, ADV-817, ADV-814, and
 ADV-809) also reproduced the stored totals; see
