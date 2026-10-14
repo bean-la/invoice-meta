@@ -37,7 +37,8 @@ preferred.
   `--discount-note` adjustments on legacy-quarter-day drafts; a real historical
   invoice still needs human review before cutover.
 - [ ] Finalize and send one approved Stripe invoice, then reconcile payment
-  status and hosted URL back to the invoice record.
+  status and hosted URL back to the invoice record. wrklogr now provides the
+  read-only `stripe-invoice-status --invoice-id` command for this step.
 - [ ] Archive historical PDFs and retain the source Notion records needed for
   audit and tax purposes.
 
