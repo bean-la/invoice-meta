@@ -2,13 +2,14 @@
 
 **Owner:** invoicedaddy (planner) → hackdaddy (executor)
 **Status:** flow defined, waiting on ADV-800 fixes (see handoff)
-**Last updated:** 2026-08-11
+**Last updated:** 2026-10-14
 
 ## Overview
 
 On the 1st of each month, invoicedaddy polls all billable project-meta repos for
 the previous month's work, side-channels with each project's goaldaddy/taskdaddy
-for confirmation, and assembles draft invoices in Notion.
+for confirmation, and assembles Stripe draft invoices. Notion remains a
+historical compatibility path only.
 
 ## Billable projects (projects.yml allowlist)
 
@@ -17,6 +18,7 @@ for confirmation, and assembles draft invoices in Notion.
 | brodie   | brodie  | 719747  | ✅ mapped      |
 | jono     | jono    | 560046  | ✅ mapped      |
 | salon94  | salon94 | 611157  | ✅ mapped      |
+| maxlevai | maxlevai | 606165  | ✅ mapped      |
 | slyce    | slyce   | —       | ❌ no Noko id  |
 | dublab   | dublab  | —       | ❌ no Noko id  |
 | farmppl  | farmppl | —       | ❌ no Noko id  |
@@ -44,9 +46,16 @@ For each project with hours > 0:
 
 ### Invoice assembly
 After all confirmations:
-1. hackdaddy runs `wrklogr notion-invoice` per project
-2. invoicedaddy reviews drafts
-3. Monthly report generated for operator
+1. hackdaddy runs `wrklogr stripe-invoice` per project for a dry-run preview
+2. invoicedaddy reviews day-level totals, customer, period, and rate
+3. hackdaddy reruns with `--create` to create a Stripe draft only
+4. an authorized operator reviews and finalizes/sends the draft in Stripe;
+   Stripe then provides the hosted payment URL
+5. the monthly report records the Stripe invoice ID and hosted-link state
+
+For historical invoices or PDF comparison, use the legacy `notion-invoice`
+commands. Do not create both a Notion invoice and a Stripe invoice for the
+same period.
 
 ### Monthly report (operator-facing)
 Generated at `reports/YYYY-MM.md`:
@@ -56,7 +65,7 @@ Generated at `reports/YYYY-MM.md`:
 
 ## Guards
 - **No unconfirmed billing** — project agent must agree
-- **Draft only** — invoicedaddy/hackdaddy never set Sent/Paid
+- **Draft only** — wrklogr never finalizes or sends Stripe invoices
 - **Allowlist only** — projects must be in projects.yml + have Noko id
 - **No double-billing** — check prior invoices before drafting
 
@@ -66,9 +75,10 @@ Generated at `reports/YYYY-MM.md`:
 3. `brane_wrklogr_report` — git commit → session → hours
 4. Session artifacts (herm-core API, tenant-scoped)
 
-## Current state (Aug 2026)
+## Current state (Oct 2026)
 - [x] work-summary.sh built (hackdaddy, build half)
-- [x] wrklogr wired with Noko mappings for brodie/jono/salon94
+- [x] wrklogr wired with Noko mappings for brodie/jono/salon94/maxlevai
+- [x] Stripe draft path and hosted-link approval flow documented
 - [ ] ADV-800 fixes (4 bugs — routed to hackdaddy via handoff)
 - [ ] No goals/ directories exist in any project-meta (goaldaddy adoption pending)
 - [ ] slyce/dublab/farmppl need Noko project ids + wrklogr config
