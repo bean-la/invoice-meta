@@ -47,15 +47,31 @@ preferred.
 
 1. Freeze new Notion invoice creation while keeping existing records read-only.
 2. Keep `bean-invoicing-api`, `bean-invoicing-web`, and Heroku available for
-   historical PDF retrieval during the retention window.
+   historical PDF retrieval during the retention window. A Netlify staging
+   site now exists, but it is only a static UI bridge while the API/Puppeteer
+   routes remain on Heroku.
 3. Move any required PDF attachments or stable links into the retained archive.
-4. Remove new callers and scheduled jobs that depend on the Heroku renderer.
-5. Rotate/remove legacy hosting credentials only after confirming no retained
+4. Port or replace the API/Puppeteer PDF endpoint, then verify invoice and
+   entries PDFs against the retained samples through Netlify.
+5. Remove new callers and scheduled jobs that depend on the Heroku renderer.
+6. Rotate/remove legacy hosting credentials only after confirming no retained
    workflow needs them.
-6. Put the Heroku app into a recoverable paused state or equivalent, verify
+7. Put the Heroku app into a recoverable paused state or equivalent, verify
    historical access requirements, and only then consider decommissioning it.
-7. Archive the old repositories rather than deleting them; preserve commit
+8. Archive the old repositories rather than deleting them; preserve commit
    history and the final migration notes.
+
+## Netlify migration status
+
+The Bean Netlify team now has a dedicated site named `bean-invoice-renderer`.
+The renderer repository branch `codex/netlify-migration` adds a Nuxt 2 static
+build (`yarn generate`), client-side route fallback, and a temporary `/api/*`
+rewrite to `https://bean-invoicing.herokuapp.com`. The local build completed
+with the legacy Node/OpenSSL compatibility settings. This is a staging bridge,
+not a Heroku retirement: the current web repo's PDF middleware cannot run in a
+static deploy, and the API still owns Notion/Noko access plus Puppeteer PDF
+generation. A successful Netlify deploy and a replacement PDF/API endpoint are
+required before changing the public invoice URL or shutting down Heroku.
 
 ## Current Heroku caller inventory
 

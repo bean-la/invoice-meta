@@ -15,6 +15,9 @@ legacy shutdown.
   legacy-compatible three-line breakdown. It remains `draft`, `auto_advance`
   is false, and it has no hosted URL.
 - Existing drafts `A5C63363-0056` and `A5C63363-0057` remain untouched.
+- Netlify site `bean-invoice-renderer` is provisioned in the Bean team, with a
+  pushed renderer migration branch and non-secret legacy API bridge variables.
+  It is not yet a cutover: the PDF/Puppeteer API remains on Heroku.
 
 ## Human approval gates
 
@@ -26,6 +29,8 @@ legacy shutdown.
   back to the retained invoice record after payment.
 - [ ] Confirm the historical PDF archive and Notion source records are
   accessible under the retention policy.
+- [ ] Deploy the Netlify renderer branch and verify invoice/entries routes,
+  API proxying, and a representative PDF through the replacement endpoint.
 - [ ] Only after the preceding gates: freeze new Notion invoice creation,
   remove active Heroku callers, and place the legacy services into a
   recoverable paused state. Do not delete repositories or revoke credentials
