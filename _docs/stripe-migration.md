@@ -6,7 +6,7 @@
 
 ```text
 Noko (billable + not invoiced)
-  → wrklogr stripe-invoice (day-level preview)
+  → wrklogr stripe-invoice (day-level or legacy-quarter-day preview)
   → human/project confirmation
   → Stripe draft
   → human review
@@ -29,8 +29,8 @@ Notion is no longer required to create a payable invoice.
 
 ## Approval and safety rules
 
-1. Generate a dry-run preview first. The preview groups time by date and shows
-   hours, day rate, descriptions, and amount.
+1. Generate a dry-run preview first. Use the dated mode for a day breakdown, or
+   `--rounding legacy-quarter-day` to reproduce the Bean API convention.
 2. Confirm the work period and total with the project/client owner.
 3. Create a Stripe draft with `--create`; the command does not finalize or send.
 4. Review Stripe line items and customer details before finalization.
@@ -47,6 +47,8 @@ for historical invoices and comparison during cutover. No new invoice should
 be created in Notion once a Stripe draft has been approved for the same period.
 
 Retire the legacy path only after:
+
+See the full staged checklist in [legacy-retirement-plan.md](legacy-retirement-plan.md).
 
 - historical PDFs and Notion page references are archived;
 - at least one Max/Ranch invoice has been reconciled end-to-end in Stripe;
