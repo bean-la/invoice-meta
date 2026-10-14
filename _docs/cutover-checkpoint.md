@@ -18,6 +18,10 @@ legacy shutdown.
 - Netlify site `bean-invoice-renderer` is provisioned in the Bean team, with a
   pushed renderer migration branch and non-secret legacy API bridge variables.
   It is not yet a cutover: the PDF/Puppeteer API remains on Heroku.
+- An unpublished Netlify draft deploy `6acfa5394ba6802a379f3023` successfully
+  served the protected invoice UI at its deploy URL using the legacy access
+  key. The custom `invoice.bean.la` domain remains pending TLS, and no
+  production deploy has been made.
 
 ## Human approval gates
 
