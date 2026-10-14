@@ -61,5 +61,13 @@ used as the final cutover proof until the pricing convention is approved.
 On 2026-10-14, the live Noko query for project `606165` returned six current,
 billable, not-yet-invoiced entries from Nick totaling 5.5 hours. The
 legacy-quarter-day dry-run classified the untagged entries as backend and
-calculated 0.75 day at $850/day, or $637.50. No Stripe invoice was created by
-that verification run. The existing live drafts remain untouched.
+calculated 0.75 day at $850/day, or $637.50. The legacy Vue renderer then
+applies `Math.round(subTotal)`, so the Stripe-compatible customer total is
+$638.00 with an explicit $0.50 rounding adjustment. No Stripe invoice was
+created by that verification run. The existing live drafts remain untouched.
+
+A local mixed-role fixture was also executed through the pinned legacy
+`noko.ts` utility and `BeanInvoice.vue`: 0.75 backend day at $850 plus 0.25
+design day at $1,000 produced $887.50 in the API calculation and `$888` in the
+rendered invoice. wrklogr now reproduces that rendered total with a separate
+legacy rounding line.
