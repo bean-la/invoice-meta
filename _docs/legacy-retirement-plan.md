@@ -104,3 +104,9 @@ billable entries totaling 2,010 minutes (33.5 hours). Its legacy preview was
 4.25 days at $1,000/day for $4,250.00, matching the retained three-page PDF's
 single backend line and the Notion Amount property. The flag cannot be used
 with `--create`.
+
+A broader five-invoice sample (ADV-815, ADV-816, ADV-817, ADV-814, and
+ADV-809) also reproduced the stored totals; see
+[`recent-invoice-cross-check-2026-10-14.md`](recent-invoice-cross-check-2026-10-14.md).
+Three matched directly from hours/rates and quarter-day rounding, while two
+required their explicit Notion `Total Override` values.
