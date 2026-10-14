@@ -50,6 +50,22 @@ preferred.
 7. Archive the old repositories rather than deleting them; preserve commit
    history and the final migration notes.
 
+## Current Heroku caller inventory
+
+As of the migration branch audit, the remaining `bean-invoicing.herokuapp.com`
+references are confined to the legacy Notion/PDF path:
+
+- `cmd/wrklogr/notion_invoice_pdf.go` default URL and help text;
+- `tools/invoice-pdf/print.mjs` default renderer URL;
+- `docs/notion-invoicing.md` legacy setup instructions; and
+- tests that assert the legacy URL construction.
+
+The Stripe invoice command and its documentation do not call Heroku. These
+legacy callers should be removed or made explicitly opt-in only at the
+cutover checkpoint, after the historical PDF archive and Stripe payment
+reconciliation gates are complete. Until then, keep the old defaults and
+hosting recoverable.
+
 ## Current known exception
 
 The current Max draft contains the historical $4,250 ADV-786 line plus current
