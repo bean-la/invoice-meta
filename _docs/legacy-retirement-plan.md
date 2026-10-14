@@ -27,7 +27,10 @@ preferred.
 - [ ] Verify category-specific rates and quarter-day rounding for a multi-role
   invoice (backend/frontend/design or equivalent).
 - [ ] Verify gratis deductions, total overrides, and discount notes have an
-  explicit Stripe representation or an approved exception.
+  explicit Stripe representation or an approved exception. The wrklogr path
+  now supports explicit `--gratis-days category=days`, `--total-override`, and
+  `--discount-note` adjustments on legacy-quarter-day drafts; a real historical
+  invoice still needs review before this gate is checked.
 - [ ] Finalize and send one approved Stripe invoice, then reconcile payment
   status and hosted URL back to the invoice record.
 - [ ] Archive historical PDFs and retain the source Notion records needed for
@@ -52,3 +55,11 @@ preferred.
 The current Max draft contains the historical $4,250 ADV-786 line plus current
 hours. It is still a draft and has not been finalized or sent. It should not be
 used as the final cutover proof until the pricing convention is approved.
+
+## Latest verification note
+
+On 2026-10-14, the live Noko query for project `606165` returned six current,
+billable, not-yet-invoiced entries from Nick totaling 5.5 hours. The
+legacy-quarter-day dry-run classified the untagged entries as backend and
+calculated 0.75 day at $850/day, or $637.50. No Stripe invoice was created by
+that verification run. The existing live drafts remain untouched.
