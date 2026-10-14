@@ -71,6 +71,11 @@ cutover checkpoint, after the historical PDF archive and Stripe payment
 reconciliation gates are complete. Until then, keep the old defaults and
 hosting recoverable.
 
+For client migrations that depended on the old untagged roster behavior,
+wrklogr now exposes `stripe.legacy.user_mapping = "bean"` as an explicit
+compatibility setting. New configurations should omit it and use logical
+roster mapping.
+
 ## Current known exception
 
 The current Max draft contains the historical $4,250 ADV-786 line plus current
