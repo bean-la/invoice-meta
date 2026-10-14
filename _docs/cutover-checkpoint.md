@@ -22,6 +22,10 @@ legacy shutdown.
   served the protected invoice UI at its deploy URL using the legacy access
   key. The custom `invoice.bean.la` domain remains pending TLS, and no
   production deploy has been made.
+- The Netlify project is currently **not linked to a Git repository**. The
+  intended continuous-deployment source is `bean-invoicing-web` branch
+  `codex/netlify-migration`; `codex/stripe-26` is a separate clean branch in
+  `bean-invoicing-api` and cannot be used as the renderer's Netlify branch.
 
 ## Human approval gates
 
