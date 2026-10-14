@@ -73,11 +73,13 @@ static deploy, and the API still owns Notion/Noko access plus Puppeteer PDF
 generation. A successful Netlify deploy and a replacement PDF/API endpoint are
 required before changing the public invoice URL or shutting down Heroku.
 
-The Netlify project is not yet connected to Git; its successful deploy was a
-manual draft deploy. Connect it to `bean-la/bean-invoicing-web` with
-`codex/netlify-migration` as the production branch before relying on automatic
-deploys. The separate `bean-invoicing-api` branch `codex/stripe-26` is reserved
-for backend migration work and is not the renderer source.
+The Netlify project is now connected to `bean-la/bean-invoicing-web` with
+`codex/netlify-migration` as the production branch. Deploy
+`6acfaea585ca78e4f8fa8000` built successfully from that branch and serves the
+renderer at its Netlify branch URL. The separate `bean-invoicing-api` branch
+`codex/stripe-26` is reserved for backend migration work and is not the
+renderer source. Direct TLS verification still finds a hostname mismatch on
+`invoice.bean.la`, so the custom domain is not yet safe for client links.
 
 The current parity baseline is green for the implemented calculation path:
 `GOCACHE=/private/tmp/wrklogr-go-cache go test ./cmd/wrklogr ./internal/...`

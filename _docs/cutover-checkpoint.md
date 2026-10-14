@@ -22,10 +22,16 @@ legacy shutdown.
   served the protected invoice UI at its deploy URL using the legacy access
   key. The custom `invoice.bean.la` domain remains pending TLS, and no
   production deploy has been made.
-- The Netlify project is currently **not linked to a Git repository**. The
-  intended continuous-deployment source is `bean-invoicing-web` branch
-  `codex/netlify-migration`; `codex/stripe-26` is a separate clean branch in
-  `bean-invoicing-api` and cannot be used as the renderer's Netlify branch.
+- Netlify is now linked to `bean-la/bean-invoicing-web` with
+  `codex/netlify-migration` as the allowed production branch. Deploy
+  `6acfaea585ca78e4f8fa8000` built successfully from commit
+  `821beaf0d4eddecfecad2cf2e2fddb1c1d4c5700` and serves HTTP 200 at its branch
+  URL. `codex/stripe-26` remains a separate backend branch in
+  `bean-invoicing-api` and is not the renderer source.
+- The branch deploy is healthy, but direct TLS verification of
+  `https://invoice.bean.la` still reports a certificate hostname mismatch.
+  The custom domain therefore remains unsafe for client-facing invoice links
+  until Netlify attaches the certificate to the live domain.
 
 ## Human approval gates
 
