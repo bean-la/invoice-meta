@@ -21,16 +21,21 @@ preferred.
 ## Verification gates
 
 - [ ] Compare one historical Notion/PDF invoice against a Stripe draft using
-  `legacy-quarter-day` and record the result.
+  `legacy-quarter-day` and record the result. The read-only historical audit
+  currently matches ADV-786 exactly, but no new live Stripe draft was created
+  solely for this audit.
 - [x] Verify the Max current-hours calculation against the legacy Bean API:
-  5.5 hours at $850/day → 0.75 day → $637.50.
-- [ ] Verify category-specific rates and quarter-day rounding for a multi-role
-  invoice (backend/frontend/design or equivalent).
-- [ ] Verify gratis deductions, total overrides, and discount notes have an
+  5.5 hours at $850/day → 0.75 day → $637.50, with the renderer-compatible
+  $0.50 adjustment producing a $638.00 customer total.
+- [x] Verify category-specific rates and quarter-day rounding for a multi-role
+  fixture (backend/design): 0.75 day at $850 plus 0.25 day at $1,000 produces
+  $887.50 in the API calculation and $888 in the legacy renderer; wrklogr
+  reproduces the rendered total with an explicit adjustment.
+- [x] Verify gratis deductions, total overrides, and discount notes have an
   explicit Stripe representation or an approved exception. The wrklogr path
-  now supports explicit `--gratis-days category=days`, `--total-override`, and
+  supports explicit `--gratis-days category=days`, `--total-override`, and
   `--discount-note` adjustments on legacy-quarter-day drafts; a real historical
-  invoice still needs review before this gate is checked.
+  invoice still needs human review before cutover.
 - [ ] Finalize and send one approved Stripe invoice, then reconcile payment
   status and hosted URL back to the invoice record.
 - [ ] Archive historical PDFs and retain the source Notion records needed for
@@ -87,3 +92,9 @@ A local mixed-role fixture was also executed through the pinned legacy
 design day at $1,000 produced $887.50 in the API calculation and `$888` in the
 rendered invoice. wrklogr now reproduces that rendered total with a separate
 legacy rounding line.
+
+The historical `--include-invoiced` wrklogr audit for ADV-786 returned 24
+billable entries totaling 2,010 minutes (33.5 hours). Its legacy preview was
+4.25 days at $1,000/day for $4,250.00, matching the retained three-page PDF's
+single backend line and the Notion Amount property. The flag cannot be used
+with `--create`.
