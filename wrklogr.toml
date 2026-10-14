@@ -52,6 +52,11 @@ role = "backend"
 "art-gallery-template" = { project_id = 611157 }
 "salon94-pdf-ios" = { project_id = 611157 }
 
+# maxlevai / The Ranch — Noko report verified 2026-10-14.
+"maxlevai-meta" = { project_id = 606165 }
+"maxlevai" = { project_id = 606165 }
+"theranch" = { project_id = 606165 }
+
 # ── PENDING: slyce / dublab / farmppl ──────────────────────────────────
 # No Noko project id registered yet (no wrklogr.toml in those project-metas,
 # no Clients DB row with a Noko id). These projects cannot be invoiced until
@@ -60,4 +65,4 @@ role = "backend"
 #   slyce-meta:    (none)
 #   dublab-meta:   (none)
 #   farmppl-meta:  (none)
-#   maxlevai-meta: (none; repo/project exists, but Noko mapping is not registered)
+#   maxlevai-meta: 606165 (mapped above)
