@@ -1,0 +1,112 @@
+# Simplified pricing map
+
+This is the proposed replacement for carrying the full Notion client-rate
+schema into Stripe. The source evidence is the Max Levai client record, the
+pinned legacy Bean API/web repositories, and the current `wrklogr` Stripe
+command.
+
+## What the existing systems do
+
+| Source | Rate model | Rounding | Special cases |
+| --- | --- | --- | --- |
+| Notion client record | Stores frontend, backend, design, senior-backend, and iOS rates | None by itself | Also stores payment terms and contact data |
+| Legacy Bean API | backend, frontend, design, PM, QA, plus `other` | Billable categories round to nearest 0.25 day; `other` is not priced | PM and QA reuse design rate; gratis, resource scaling, and total override are invoice fields |
+| Legacy Bean web invoice | Displays category rows and gratis rows | Rounds the final subtotal with `Math.round` unless overridden | Produces a whole-dollar customer total |
+| Current wrklogr Notion path | One selected role rate per project aggregation | Raw hours ÷ 8, rounded to cents | No legacy quarter-day or renderer rounding |
+
+For Max, the Notion record currently contains:
+
+- backend: $1,000/day
+- frontend: $900/day
+- design: $900/day
+- senior backend: $1,200/day
+- iOS: $1,200/day
+- Noko project: `606165`
+
+The historical ADV-786 invoice used the backend rate of $1,000/day. The
+current approved Stripe catalog also contains $850/day as the current default
+and $900/day as an alternate reference. Those are separate pricing decisions;
+the catalog should not silently replace a client-specific rate.
+
+## Proposed minimal model
+
+Keep only the fields needed to calculate and explain an invoice:
+
+```text
+PricingProfile {
+  default_day_rate: money
+  category_rates: { backend?, frontend?, design?, pm?, qa? }
+  rounding: daily-cents | legacy-quarter-day
+  final_total_rounding: none | whole-dollar
+  roster_mapping: logical | bean
+}
+
+InvoiceAdjustments {
+  gratis_days: { category: days }
+  total_override?: money
+  discount_note?: text
+}
+```
+
+The profile belongs in wrklogr configuration or a small versioned client
+profile, not in Stripe. The adjustments belong to the individual invoice, not
+to the reusable client profile.
+
+Recommended defaults for new work:
+
+```text
+default_day_rate: $850
+rounding: daily-cents
+final_total_rounding: none
+roster_mapping: logical
+```
+
+Use the legacy profile only for a client or invoice that must reproduce the
+old Bean output:
+
+```text
+category_rates: backend=$1,000, frontend=$900, design=$900, pm=$900, qa=$900
+rounding: legacy-quarter-day
+final_total_rounding: whole-dollar
+roster_mapping: bean       # only when the old untagged-user fallback matters
+```
+
+The senior-backend and iOS fields should not be carried into the first
+replacement map because the old Bean category model does not use them. If
+Noko begins producing those roles as billable categories, add explicit
+categories and new approved Stripe Prices then; do not silently map them to
+backend.
+
+## Stripe boundary
+
+Stripe should provide the customer, hosted invoice page, payment collection,
+and payment status. It should not be the calculation engine. Keep the existing
+one-time catalog as rate references:
+
+| Catalog reference | Use |
+| --- | --- |
+| $850/day | current default |
+| $900/day | alternate / Max frontend-design reference |
+| $1,000/day | historical Max backend / ADV-786 reference |
+
+`wrklogr` should continue creating invoice-specific amounts from Noko. This
+is necessary for quarter-day rounding, category aggregation, gratis rows,
+whole-dollar renderer compatibility, and total overrides. Stripe line
+descriptions and metadata should carry the resulting category/day/rate
+breakdown; a Stripe Price quantity alone cannot represent those rules.
+
+## Decision for Max
+
+Do not change the existing live drafts based on this document. For a new Max
+invoice, first choose one of these explicit conventions:
+
+1. **Current simplified billing:** all selected work at $850/day, daily-cents
+   rounding, with a dated Noko breakdown.
+2. **Legacy-compatible billing:** category rates from the Max profile above,
+   quarter-day rounding, and whole-dollar final-total rounding.
+3. **Historical reproduction:** backend-only at $1,000/day, matching ADV-786.
+
+The draft should record the selected profile and rate in metadata so a later
+review can explain why its total differs from another invoice for the same
+client.
+
